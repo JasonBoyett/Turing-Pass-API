@@ -26,22 +26,21 @@ func main() {
 	})
 
   app.Get("/jsonp", func(c *fiber.Ctx) error {
-    data := returnValue{property: "value", someOtherProperty: 123}
-    log.Println(data)
+    log.Println(fiber.Map{"property": "value", "someOtherProperty": 123})
     callbackFunc := c.Query("callback")
 
     if callbackFunc != "" {
       return c.JSONP(
-        returnValue{
-          property: "value",
-          someOtherProperty: 123,
+        fiber.Map{
+          "property": "value",
+          "someOtherProperty": 123,
         },
         callbackFunc)
     } else {
-      return c.JSONP(
-        returnValue{
-          property: "value",
-          someOtherProperty: 123,
+      return c.JSON(
+        fiber.Map{
+          "property": "value",
+          "someOtherProperty": 123,
         },
       )
     }
