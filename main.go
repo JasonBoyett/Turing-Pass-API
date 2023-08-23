@@ -3,10 +3,11 @@ package main
 import (
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/gofiber/fiber/v2"
 
-  "github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 
@@ -21,11 +22,19 @@ func main() {
 	})
 
   app.Get("/jsonp", func(c *fiber.Ctx) error {
+    var length int
     callbackFunc := c.Query("callback")
     passWord := c.Query("passWord")
     siteName := c.Query("siteName")
+    symbols := c.Query("symbols")
+    lengthFromQuery := c.Query("length")
 
-    newPass, err := Encrypt(passWord, siteName)
+    length, err := strconv.Atoi(lengthFromQuery)
+    if err != nil {
+      length = 16
+    }
+
+    newPass, err := Encrypt(passWord, siteName, symbols == "true", length)
     if err != nil {
       return c.JSON(
         fiber.Map{
