@@ -11,6 +11,7 @@ import (
 
 type returnValue struct {
 	property string
+  someOtherProperty int
 }
 
 func main() {
@@ -23,7 +24,8 @@ func main() {
 	})
 
   app.Get("/jsonp", func(c *fiber.Ctx) error {
-    data := returnValue{property: "value"}
+    data := returnValue{property: "value", someOtherProperty: 123}
+    log.Println(data)
     callbackFunc := c.Query("callback")
 
     if callbackFunc != "" {
