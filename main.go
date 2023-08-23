@@ -15,10 +15,12 @@ func main() {
   app := fiber.New()
   app.Get("/json", func(c *fiber.Ctx) error {
     data := returnValue{value: "Hello World"}
+
     return c.JSON(data)
-  })
-  return c.JSON(fiber.Map{
-    "value": "Hello World",
+
+    return c.JSON(fiber.Map{
+      "value": "Hello World",
+    })
   })
 
   port := os.Getenv("PORT")
