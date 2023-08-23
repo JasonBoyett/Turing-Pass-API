@@ -5,33 +5,34 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+
+  "github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 type returnValue struct {
-  value string
+	property string
 }
 
 func main() {
-  app := fiber.New()
+	app := fiber.New()
 
-  app.Get("/", func (c *fiber.Ctx) error {
-    return c.SendString("Hello, World!")
-  })
-    
-  app.Get("/jsonp", func(c *fiber.Ctx) error {
-    data := returnValue{value: "Hello World"}
+  app.Use(cors.New())
 
-    return c.JSONP(data)
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
 
-    return c.JSONP(fiber.Map{
-      "value": "Hello World",
-    })
-  })
+	app.Get("/jsonp", func(c *fiber.Ctx) error {
+		// data := returnValue{value: "Hello World"}
 
-  port := os.Getenv("PORT")
-  if port == "" {
-    port = "3000"
-  }
+		return c.JSONP(returnValue{property: "Hello World"})
 
-log.Fatal(app.Listen("0.0.0.0:" + port))
+	})
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 }

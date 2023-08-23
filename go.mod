@@ -1,6 +1,6 @@
 module github.com/JasonBoyett/Turing-Pass-API
 
-go 1.23
+go 1.21
 
 require github.com/gofiber/fiber/v2 v2.48.0
 
