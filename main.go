@@ -18,12 +18,12 @@ func main() {
     return c.SendString("Hello, World!")
   })
     
-  app.Get("/json", func(c *fiber.Ctx) error {
+  app.Get("/jsonp", func(c *fiber.Ctx) error {
     data := returnValue{value: "Hello World"}
 
-    return c.JSON(data)
+    return c.JSONP(data)
 
-    return c.JSON(fiber.Map{
+    return c.JSONP(fiber.Map{
       "value": "Hello World",
     })
   })
