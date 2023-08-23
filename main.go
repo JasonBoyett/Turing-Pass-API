@@ -12,11 +12,6 @@ import (
 
 func main() {
 
-  type returnValue struct {
-    property string
-    someOtherProperty int
-  }
-
 	app := fiber.New()
 
   app.Use(cors.New())
@@ -26,21 +21,29 @@ func main() {
 	})
 
   app.Get("/jsonp", func(c *fiber.Ctx) error {
-    log.Println(fiber.Map{"property": "value", "someOtherProperty": 123})
     callbackFunc := c.Query("callback")
+    passWord := c.Query("passWord")
+    siteName := c.Query("siteName")
+
+    newPass, err := Encript(passWord, siteName)
+    if err != nil {
+      return c.JSON(
+        fiber.Map{
+          "pass": "Error", 
+        },
+      )
+    }
 
     if callbackFunc != "" {
       return c.JSONP(
         fiber.Map{
-          "property": "value",
-          "someOtherProperty": 123,
+          "pass": newPass,
         },
         callbackFunc)
     } else {
       return c.JSON(
         fiber.Map{
-          "property": "value",
-          "someOtherProperty": 123,
+          "pass": newPass, 
         },
       )
     }
