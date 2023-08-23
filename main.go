@@ -17,6 +17,10 @@ func main() {
     data := returnValue{value: "Hello World"}
     return c.JSON(data)
   })
+  return c.JSON(fiber.Map{
+    "name": "Grame",
+    "age": 20,
+  })
 
   port := os.Getenv("PORT")
   if port == "" {
