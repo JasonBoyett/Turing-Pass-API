@@ -22,12 +22,16 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 
-	app.Get("/jsonp", func(c *fiber.Ctx) error {
-		// data := returnValue{value: "Hello World"}
+  app.Get("/jsonp", func(c *fiber.Ctx) error {
+    data := returnValue{property: "value"}
+    callbackFunc := c.Query("callback")
 
-		return c.JSONP(returnValue{property: "Hello World"})
-
-	})
+    if callbackFunc != "" {
+      return c.JSONP(data, callbackFunc)
+    } else {
+      return c.JSON(data)
+    }
+  })
 
 	port := os.Getenv("PORT")
 	if port == "" {
