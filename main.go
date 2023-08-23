@@ -9,12 +9,14 @@ import (
   "github.com/gofiber/fiber/v2/middleware/cors"
 )
 
-type returnValue struct {
-	property string
-  someOtherProperty int
-}
 
 func main() {
+
+  type returnValue struct {
+    property string
+    someOtherProperty int
+  }
+
 	app := fiber.New()
 
   app.Use(cors.New())
@@ -29,9 +31,19 @@ func main() {
     callbackFunc := c.Query("callback")
 
     if callbackFunc != "" {
-      return c.JSONP(data, callbackFunc)
+      return c.JSONP(
+        returnValue{
+          property: "value",
+          someOtherProperty: 123,
+        },
+        callbackFunc)
     } else {
-      return c.JSON(data)
+      return c.JSONP(
+        returnValue{
+          property: "value",
+          someOtherProperty: 123,
+        },
+      )
     }
   })
 
