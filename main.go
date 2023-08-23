@@ -13,6 +13,11 @@ type returnValue struct {
 
 func main() {
   app := fiber.New()
+
+  app.Get("/", func (c *fiber.Ctx) error {
+    return c.SendString("Hello, World!")
+  })
+    
   app.Get("/json", func(c *fiber.Ctx) error {
     data := returnValue{value: "Hello World"}
 
