@@ -25,7 +25,7 @@ func main() {
     passWord := c.Query("passWord")
     siteName := c.Query("siteName")
 
-    newPass, err := Encript(passWord, siteName)
+    newPass, err := Encrypt(passWord, siteName)
     if err != nil {
       return c.JSON(
         fiber.Map{
