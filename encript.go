@@ -3,7 +3,6 @@ package main
 import (
 	"crypto/sha256"
 	"encoding/base64"
-	"fmt"
 	"log"
 	"math"
 	"strings"
@@ -32,7 +31,7 @@ func Encrypt(token1, token2 string, simbols bool, length int) (string, error) {
   } else {
     result = ensureContainsCapital(base64.StdEncoding.EncodeToString(hash[:length]))
   }
-  return fmt.Sprintf("%x", result), nil
+  return result, nil
 }
 
 func ensureContainsCapital(str string) string {
