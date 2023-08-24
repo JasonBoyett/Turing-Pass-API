@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+  encrypt "github.com/JasonBoyett/Turing-Pass-API/encrypt"
 
 	"github.com/gofiber/fiber/v2"
 
@@ -27,14 +28,15 @@ func main() {
     passWord := c.Query("passWord")
     siteName := c.Query("siteName")
     symbols := c.Query("symbols")
-    lengthFromQuery := c.Query("length")
+    lengthFromQuery := c.Query("len")
 
     length, err := strconv.Atoi(lengthFromQuery)
     if err != nil {
       length = 16
     }
+    log.Println(length)
 
-    newPass, err := Encrypt(passWord, siteName, symbols == "true", length)
+    newPass, err := encrypt.Encrypt(passWord, siteName, symbols == "true", length)
     if err != nil {
       return c.JSON(
         fiber.Map{
