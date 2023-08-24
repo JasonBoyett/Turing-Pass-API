@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
+	"log"
 	"math"
 	"strings"
 	"unicode"
@@ -47,7 +48,7 @@ func ensureContainsCapital(str string) string {
       break
     }
   }
-  fmt.Println(result)
+  log.Println(result)
   return result
 }
 
