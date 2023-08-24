@@ -4,6 +4,9 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
+	"math"
+	"strings"
+	"unicode"
 )
 
 func Encrypt(token1, token2 string, simbols bool, length int) (string, error) {
@@ -25,10 +28,25 @@ func Encrypt(token1, token2 string, simbols bool, length int) (string, error) {
   }
 
   if simbols {
-    result = base64.URLEncoding.EncodeToString(hash[:length])
+    result = ensureContainsCapital(base64.URLEncoding.EncodeToString(hash[:length]))
   } else {
-    result = base64.StdEncoding.EncodeToString(hash[:length])
+    result = ensureContainsCapital(base64.StdEncoding.EncodeToString(hash[:length]))
   }
   return fmt.Sprintf("%x", result), nil
+}
+
+func ensureContainsCapital(str string) string {
+  //use the square root of the length of str to determine which character to capitalize
+  //fancy type casting magic to get the square root of the length of str as an int
+  start := int(math.Sqrt(float64(len(str))))
+  
+  for i := start; i < len(str); i += start {
+    letter := str[i]
+    if unicode.IsLetter(rune(letter)) {
+      str = str[:i] + strings.ToUpper(string(letter)) + str[i+1:]
+      break
+    }
+  }
+  return str
 }
 
