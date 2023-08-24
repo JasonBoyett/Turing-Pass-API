@@ -19,7 +19,7 @@ func main() {
   app.Use(cors.New())
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
+		return c.SendString("Hello, from Turing Pass!")
 	})
 
   app.Get("/jsonp", func(c *fiber.Ctx) error {
