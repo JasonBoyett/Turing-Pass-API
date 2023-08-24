@@ -47,6 +47,7 @@ func ensureContainsCapital(str string) string {
       break
     }
   }
+  fmt.Println(result)
   return result
 }
 
