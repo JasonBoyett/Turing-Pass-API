@@ -22,7 +22,6 @@ func Encrypt(token1, token2 string, simbols bool, length int) (string, error) {
 
 
   hash := sha256.Sum256([]byte(combined))
-
   if length > len(hash) {
     length = len(hash)
   }
@@ -36,17 +35,18 @@ func Encrypt(token1, token2 string, simbols bool, length int) (string, error) {
 }
 
 func ensureContainsCapital(str string) string {
+  var result string
   //use the square root of the length of str to determine which character to capitalize
   //fancy type casting magic to get the square root of the length of str as an int
   start := int(math.Sqrt(float64(len(str))))
   
-  for i := start; i < len(str); i += start {
+  for i := start - 1; i < len(str); i += start {
     letter := str[i]
     if unicode.IsLetter(rune(letter)) {
-      str = str[:i] + strings.ToUpper(string(letter)) + str[i+1:]
+      result = str[:i] + strings.ToUpper(string(letter)) + str[i+1:]
       break
     }
   }
-  return str
+  return result
 }
 
