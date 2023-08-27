@@ -1,6 +1,8 @@
 package encrypt
 
-import ("testing")
+import (
+	"testing"
+)
 
 func TestVariance(t *testing.T){
   enitialResult, err := Encrypt("foo", "bar", true, 16)
@@ -74,4 +76,15 @@ func TestConsistancyNoSymbols(t *testing.T){
     }
   }
   t.Logf("PASS Consistancy Success")
+}
+
+func TestPerformance(t *testing.T){
+  testing.Benchmark(func(b *testing.B) {
+    for i := 0; i < 5_000_000; i++ {
+      _, err:= Encrypt("foo", "bar", true, 16)
+      if err != nil {
+        b.Fatal("Execution Error: ", err)
+      }
+    }
+  })
 }
