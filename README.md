@@ -18,7 +18,7 @@ Turing pass uses a different approach to managing passwords. Instead of us stori
 
 ## Get Turing Pass Today!
 
-Turing Pass is free and open source so feel free to download this repository as a zip file and load it as a custom chrome exstension in your chromium based browser. Once Turing Pass is out of beta stages we will be submitting it to the chrome store for public use. We will update this document when it has been released and will include the url to download it from the chrome store.
+Turing Pass is free and open source so feel free to download the [Turing Pass Chrome Exstension repo](https://github.com/JasonBoyett/Turing-Pass-CE) as a zip file and load it as a custom chrome exstension in your chromium based browser. Once Turing Pass is out of beta stages we will be submitting it to the chrome store for public use. We will update this document when it has been released and will include the url to download it from the chrome store.
 
 Use this helpful [guide](https://dev.to/ben/how-to-install-chrome-extensions-manually-from-github-1612) to download and install Truing Pass from GitHub
 
