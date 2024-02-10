@@ -1,8 +1,8 @@
 /*!!DO NOT UNDER ANY CIRCUMSTANCES CHANGE ANY OF THE CODE IN THIS FILE
 UNLESS YOU ARE ABSOLUTELY SURE OF WHAT YOU ARE DOING. CHANGING THIS CODE
-CAN BREAK THE THE CONSISTANCY OF THE ENCRYPTION AND WILL 
+CAN BREAK THE THE CONSISTANCY OF THE ENCRYPTION AND WILL
 RENDER THE PROGRAM USELESS.
-IF YOU MUST REFACTOR OR MODIFY THIS CODE, DO SO IN A SEPERATE FILE AND 
+IF YOU MUST REFACTOR OR MODIFY THIS CODE, DO SO IN A SEPERATE FILE AND
 UNIT-TEST IT VERY THOROUGHLY BEFORE USING IT IN PRODUCTION.
 YOUR MODIFIED CODE SHOULD RETURN THE EXACT SAME RESULTS AS THE ORIGINAL.
 IF THIS ALGORITHM IS CHANGED TURING PASS WILL NO LONGER BE ABLE TO
@@ -57,7 +57,7 @@ func format(str string, symbols bool, length int) string {
 		result = strings.ReplaceAll(result, "_", "")
 	}
 	if symbols && !hasSymbol(result) {
-    position := int(math.Pow(float64(length), 1.0/3.0)) * 2
+		position := int(math.Pow(float64(length), 1.0/3.0)) * 2
 		result = result[:position] + "!" + result[position:]
 	}
 	if !hasCapital(result) {
@@ -69,7 +69,7 @@ func format(str string, symbols bool, length int) string {
 			}
 		}
 	}
-  return result[:length]
+	return result[:length]
 }
 
 func hasCapital(str string) bool {
